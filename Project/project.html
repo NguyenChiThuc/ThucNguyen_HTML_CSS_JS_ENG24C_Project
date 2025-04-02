@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VocabApp</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Epilogue:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./project.css">
+</head>
+
+<body>
+    <div class="container">
+        <nav class="quizlet">
+            <h3>VocabApp</h3>
+            <div class="nav-links">
+                <a href="#">Dashboard</a>
+                <a href="#">Categories</a>
+                <a href="#">Vocabulary</a>
+                <a href="#">Flashcards</a>
+                <a href="#">Quiz</a>
+            </div>
+        </nav>
+        <div class="main-container" id="main-container">
+            <h2>Welcome to VocabApp</h2>
+            <p>Learn and practice vocabulary with flashcards and quizzes</p>
+            <div class="main-btn">
+                <button class="getstart" onclick="displayShowLogin()">Get Started</button>
+                <button class="getaccount" onclick="displayShowRegister()">Create Account</button>
+            </div>
+        </div>
+        <nav class="nav-bar-create" style="display: none;">
+            <h3>VocabApp</h3>
+            <div class="nav-btn">
+                <button onclick="displayShowLogin()">Login</button>
+                <button onclick="displayShowRegister()">Register</button>
+            </div>
+        </nav>
+        <div class="container-register" id="register-card" style="display: none;">
+            <h2>Register</h2>
+            <label for="">First Name:</label>
+            <br>
+            <input type="text" name="first-name" id="first-name" placeholder="Enter first name">
+            <div class="error" id="first-name-error"></div>
+            <br>
+            <label for="">Last Name:</label>
+            <br>
+            <input type="text" name="last-name" id="last-name" placeholder="Enter last name">
+            <div class="error" id="last-name-error"></div>
+            <br>
+            <label for="">Email Address:</label>
+            <br>
+            <input type="email" name="email" id="email" placeholder="Enter email address">
+            <div class="error" id="email-error"></div>
+            <br>
+            <label for="">Password:</label>
+            <br>
+            <input type="password" name="pass" id="pass" placeholder="Enter password">
+            <div class="error" id="pass-error"></div>
+            <br>
+            <label for="">Confirm Password:</label>
+            <br>
+            <input type="password" name="pass" id="confirm-pass" placeholder="Enter confirm password">
+            <div class="error" id="confirm-pass-error"></div>
+            <br>
+            <button id="register-btn" onclick="displayRegister()">Register</button>
+        </div>
+        <div class="loggin" id="loggin" style="display: none;">
+            <h2>Login</h2>
+            <label for="">Email Address:</label>
+            <br>
+            <input type="email" name="email" id="login-email" placeholder="Enter your email address">
+            <div class="error" id="login-email-error"></div>
+            <br>
+            <label for="">Password:</label>
+            <br>
+            <input type="password" name="pass" id="login-pass" placeholder="Enter your password">
+            <div class="error" id="login-pass-error"></div>
+            <br>
+            <button id="login-btn" onclick="displayLogin()">Login</button>
+        </div>
+        <nav class="dashboard-nav" id="dashboard-nav" style="display: none;">
+            <div class="main-nav">
+                <h3>VocabApp</h3>
+                <div class="nav-links">
+                    <a href="#">Categories</a>
+                    <a href="#"  onclick="displayVocab()">Vocabulary</a>
+                    <a href="#">Flashcards</a>
+                    <a href="#">Quiz</a>
+                </div>
+            </div>
+            <div class="user-info">
+                <span id="user-hi">Hi,</span>
+                <button class="btn-logout" onclick="displayLogout()">Logout</button>
+            </div>
+        </nav>
+        <div class="dashboard" id="dashboard" style="display: none;">
+            <h2 id="welcome-mess">Chao mung ban da quay lai hoc, !</h2>
+            <p>Tiếp tục học từ vựng và cải thiện kỹ năng của bạn ngay hôm nay.</p>
+            <button class="quiz-btn">Làm Quizz</button>
+        </div>
+        <div class="container-vocab" id="container-vocab" style="display: none;">
+            <header class="vocab-nav" id="vocab-nav">
+                <h3>Vocabulary Words</h3>
+                <button class="vocab-btn" onclick="displayVocabOpen()">Add New Word</button>
+            </header>
+            <div class="filter">
+                <select class="select-option" id="cate-filter">
+                    <option value="All Categories">All Categories</option>
+                    <option value="Animals">Animals</option>
+                    <option value="Hobbies">Hobbies</option>
+                </select>
+                <br>
+                <input type="text" id="search-name" placeholder="Search vocabulary..." oninput="displaySearch()">
+            </div>
+            <table class="vocab-table">
+                <thead>
+                    <tr>
+                        <th>WORD</th>
+                        <th>MEANING</th>
+                        <th>CATEGORY</th>
+                        <th>ACTIONS</th>
+                    </tr>
+                </thead>
+                <tbody id="vocab-list"></tbody>
+            </table>
+        </div>
+        <div class="modal" id="add-edit-modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modal-title">Add New Word</h3>
+                    <span class="close-btn" onclick="displayCloseModal('add-edit-modal')">x</span>
+                </div>
+                <form id="vocab-form" onsubmit="displayAddNewWord(event)">
+                    <div class="form-group">
+                        <label for="modal-word">Word</label>
+                        <br>
+                        <input type="text" name="word" id="modal-word">
+                    </div>
+                    <div class="form-group">
+                        <label for="modal-mean">Meaning</label>
+                        <br>
+                        <textarea name="text" id="modal-mean"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="modal-cate">Category</label>
+                        <br>
+                        <select id="modal-cate">
+                            <option value="" disabled selected>Select Categories</option>
+                            <option value="Animals">Animals</option>
+                            <option value="Hobbies">Hobbies</option>
+                        </select>
+                    </div>
+                    <div class="modal-action">
+                        <button type="button" class="cancel-btn"
+                            onclick="displayCloseModal('add-edit-modal')">Cancel</button>
+                        <button type="submit" id="submit-btn">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <footer class="nav-footer">
+            <p>&copy;2024 VocabApp. All rights reserved</p>
+        </footer>
+    </div>
+    <script src="./app.js"></script>
+    <script src="./auth.js"></script>
+    <script src="./vocabulary.js"></script>
+</body>
+
+</html>
