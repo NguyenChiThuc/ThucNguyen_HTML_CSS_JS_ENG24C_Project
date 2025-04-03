@@ -10,7 +10,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Epilogue:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="./project.css">
+    <link rel="stylesheet" href="../CSS/project.css">
 </head>
 
 <body>
@@ -88,7 +88,7 @@
                 <h3>VocabApp</h3>
                 <div class="nav-links">
                     <a href="#">Categories</a>
-                    <a href="#"  onclick="displayVocab()">Vocabulary</a>
+                    <a href="#" onclick="displayVocab()">Vocabulary</a>
                     <a href="#">Flashcards</a>
                     <a href="#">Quiz</a>
                 </div>
@@ -167,9 +167,15 @@
             <p>&copy;2024 VocabApp. All rights reserved</p>
         </footer>
     </div>
-    <script src="./app.js"></script>
-    <script src="./auth.js"></script>
-    <script src="./vocabulary.js"></script>
+    <label for="modal-word">Word:</label>
+    <input type="text" id="modal-word" placeholder="Enter word" onkeyup="validateWord()">
+    <p id="word-error" style="color: red; display: none;">
+        Word must be at least 8 characters, including an uppercase letter, a lowercase letter, and a number.
+    </p>
+
+    <script src="../JS/app.js"></script>
+    <script src="../JS/auth.js"></script>
+    <script src="../JS/vocabulary.js"></script>
 </body>
 
 </html>

@@ -34,42 +34,43 @@ function displayRegister() {
         isValid = false;
     }
     if (!lastName) {
-        displayShowError("Last name cannot be blank", "last-name-error")
+        displayShowError("Last name cannot be blank", "last-name-error");
         isValid = false;
     }
-    let emailCheck = /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/;
-    let indexUser = JSON.parse(localStorage.getItem("users")) || [];
-    let emailElement = indexUser.some(user => user.email === email);
+    const emailCheck = /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/;
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+    let emailExists = users.some(user => user.email === email);
     if (!emailCheck.test(email)) {
-        displayShowError("Invalid email!", "email-error")
+        displayShowError("Invalid email format!", "email-error");
         isValid = false;
-    } else if (emailElement) {
-        displayShowError("Email already exists!", "email-error")
+    } else if (emailExists) {
+        displayShowError("Email already exists!", "email-error");
         isValid = false;
     }
-    let passCheck = /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
+    const passCheck = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
     if (!passCheck.test(password)) {
-        displayShowError("Password must be at least 8 characters, including uppercase letters, lowercase letters, and at least one number", "pass-error")
+        displayShowError("Password must be at least 8 characters, including an uppercase letter, a lowercase letter, and a number", "pass-error");
         isValid = false;
     }
     if (password !== confirmPass) {
-        displayShowError("Confirm Password does not match Password", "confirm-pass-error")
+        displayShowError("Passwords do not match", "confirm-pass-error");
         isValid = false;
     }
     if (isValid) {
-        let user = {
+        let newUser = {
             firstName: firstName,
             lastName: lastName,
             email: email,
-            password: password,
+            password: password
         };
-        indexUser.push(user);
-        localStorage.setItem("users", JSON.stringify(indexUser));
-        alert("Registration successful! Please login")
+        users.push(newUser);
+        localStorage.setItem("users", JSON.stringify(users));
+        alert("Registration successful! Please log in.");
         displayShowLogin();
-        document.getElementById("register-card").querySelectorAll("input").forEach(input => input.value = "");
+        document.querySelectorAll("#register-card input").forEach(input => input.value = "");
     }
 }
+
 function displayLogin() {
     let email = document.getElementById("login-email").value.trim();
     let pass = document.getElementById("login-pass").value.trim();
