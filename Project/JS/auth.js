@@ -92,7 +92,12 @@ function displayLogin() {
             displayShowError("Email or Password is incorrect", "login-email-error");
             displayShowError("", "login-pass-error");
         } else {
-            alert("Login succesful!")
+            swal({
+                title: "WELCOME BACK!",
+                text: "You have successfully logged in !",
+                icon: "success",
+                button: "Aww yiss!",
+              });
             localStorage.setItem("currentUser", JSON.stringify(user))
             displayShowDashboard();
             document.getElementById("login-email").value = ""

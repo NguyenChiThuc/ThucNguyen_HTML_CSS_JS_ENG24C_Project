@@ -12,8 +12,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="../CSS/project.css">
 </head>
-
-<body>
+    <body>  
     <div class="container">
         <nav class="quizlet">
             <h3>VocabApp</h3>
@@ -167,15 +166,10 @@
             <p>&copy;2024 VocabApp. All rights reserved</p>
         </footer>
     </div>
-    <label for="modal-word">Word:</label>
-    <input type="text" id="modal-word" placeholder="Enter word" onkeyup="validateWord()">
-    <p id="word-error" style="color: red; display: none;">
-        Word must be at least 8 characters, including an uppercase letter, a lowercase letter, and a number.
-    </p>
-
     <script src="../JS/app.js"></script>
     <script src="../JS/auth.js"></script>
     <script src="../JS/vocabulary.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </body>
 
 </html>
